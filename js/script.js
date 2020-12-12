@@ -22,7 +22,7 @@ function computerPlay() {
       console.error('Error in ComputerPlay function!');
   }
 
-   return word;
+  return word;
 }
 
 /* 
@@ -37,7 +37,7 @@ function computerPlay() {
 */
 function singleRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
-computerSelection = computerSelection.toLowerCase()
+  computerSelection = computerSelection.toLowerCase();
   let result;
   if (playerSelection === 'rock' && computerSelection === 'scissors') {
     result = `You win! ${capitalizeFirstLetter(
@@ -67,3 +67,52 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/* 
+Game function
+1)Play round (call single round function)
+2)create a varibale userScore
+3)create a variable computerScore
+4)if singleRound contains win,add 1 score to user, else if singleRound contains tie do nothing,else add 1 score to computer
+5)Show result of this round(callFunction) and score of the game(User score: computer score)
+6)repeat 5 times
+*/
+
+function game() {
+  let userScore = 0;
+  let computerScore = 0;
+  let showScore = () =>
+    console.log(`You: ${userScore} - Computer: ${computerScore}`);
+
+  for (let i = 0; i < 5; i++) {
+     let userInput = prompt('Please enter word');
+     while (true) {
+        if (userInput === null || userInput === '') {
+           userInput = prompt('Please enter word');
+        } else {
+           break;
+        }
+     }
+    let roundResult = singleRound(userInput, computerPlay());
+
+    if (roundResult.includes('win')) {
+      console.log(roundResult);
+      userScore++;
+      showScore();
+    } else if (roundResult.includes('loose')) {
+      console.log(roundResult);
+      computerScore++;
+      showScore();
+    } else if (roundResult.includes('Tie')) {
+      console.log(roundResult);
+      showScore();
+    } else {
+      console.roundResult;
+      computerScore++;
+      showScore();
+    }
+
+    console.log('\n');
+  }
+}
+
+ game();
